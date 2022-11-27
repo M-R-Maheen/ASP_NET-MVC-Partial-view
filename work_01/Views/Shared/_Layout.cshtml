@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Toy House</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.6.1.js"></script>
+    @RenderSection("styles", false)
+    <style>
+        body {
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-expand-md navbar-dark fixed-top shadow-sm border-bottom" style="background-color:mediumpurple">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="~/Images/toy_logo.PNG" width="40" height="40" />
+                @Html.ActionLink("Toy House", "Index", "Home", new { }, new { @class = "navbar-brand" })
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarNav">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "text-white nav-link" })</li>
+                    <li>@Html.ActionLink("Category", "Index", "Categories", new { }, new { @class = "text-white nav-link" })</li>
+                    <li>@Html.ActionLink("Toys", "Index", "Toys", new { }, new { @class = "text-white nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+    <footer class="container">
+        <p class="text-center">&copy; @DateTime.Now.Year - isdb-bisew.org</p>
+    </footer>
+    @RenderSection("scripts",false)
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>

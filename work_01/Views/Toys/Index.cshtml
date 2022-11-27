@@ -1,0 +1,44 @@
+﻿@model IEnumerable<work_01.Models.Toy>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col">
+        <h2 class="display-4">Toy List</h2>
+        <div class="d-flex justify-content-end">
+            <a href="@Url.Action("Create","Toys")" class="btn btn-outline-primary btn-sm mb-2">Add New</a>
+        </div>
+        <table class="table table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Toy Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Stored Date</th>
+                    <th>Picture</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@Html.DisplayFor(x => item.ToyName)</td>
+                    <td>@Html.DisplayFor(x => item.Price)</td>
+                    <td>@Html.DisplayFor(x => item.Category.CName)</td>
+                    <td>@Html.DisplayFor(x => item.StoreDate)</td>
+                    <td>
+                        <img src="@Url.Content(item.PicturePath)" width="50" height="50"/>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit","Toys",new { id=item.Id})" class="btn btn-outline-success"> <i class="fa fa-pencil"></i></a>
+                        <a href="@Url.Action("Delete","Toys",new { id=item.Id})" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

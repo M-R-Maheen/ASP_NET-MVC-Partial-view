@@ -1,0 +1,89 @@
+﻿@model work_01.Models.ViewModels.ToyVM
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row">
+    <div class="col">
+        @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg", OnComplete = "clearAll" }))
+        {
+            @Html.AntiForgeryToken();
+            <h2 class="display-4">Add New Toy</h2>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.ToyName, htmlAttributes: new { @class = "col-form-label col-2" })
+                <div class="col-6">
+                    @Html.EditorFor(x => x.ToyName, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-4">
+                    @Html.ValidationMessageFor(x => x.ToyName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.Price, htmlAttributes: new { @class = "col-form-label col-2" })
+                <div class="col-6">
+                    @Html.EditorFor(x => x.Price, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-4">
+                    @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.CId, htmlAttributes: new { @class = "col-form-label col-2" })
+                <div class="col-6">
+                    @Html.DropDownListFor(x => x.CId, ViewBag.categories as SelectList, "-----Select-----", new { @class = "form-control" })
+                </div>
+                <div class="col-4">
+                    @Html.ValidationMessageFor(x => x.CId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.StoreDate, htmlAttributes: new { @class = "col-form-label col-2" })
+                <div class="col-6">
+                    @Html.EditorFor(x => x.StoreDate, new { htmlAttributes = new { @class = "form-control", Type = "date" } })
+                </div>
+                <div class="col-4">
+                    @Html.ValidationMessageFor(x => x.StoreDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.Picture, htmlAttributes: new { @class = "col-form-label col-2" })
+                <div class="col-6">
+                    @Html.TextBoxFor(x => x.Picture, new { @class = "form-control", Type = "file" })
+                </div>
+                <div class="col-4">
+                    @Html.ValidationMessageFor(x => x.Picture, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-10 offset-2">
+                    <button type="submit" class="btn btn-primary" id="btnCreate"><i class="fa fa-save"></i> Save</button>
+                    <div id="msg"></div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    <a href="@Url.Action("Index","Toys")" class="btn btn-link btn-sm mb-2 text-decoration-none"><i class="fa fa-arrow-circle-left"></i> Back to List</a>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        $("#form0").attr("enctype", "multipart/form-data");
+        function clearAll() {
+            $("#form0").trigger("reset");
+        }
+    </script>
+}
